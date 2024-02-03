@@ -1,0 +1,47 @@
+{
+  "$id": "CSAwebContentMirror",
+  "$schema": "",
+  "$schemaVersion": "1.0.0",
+  "urlData": {
+    "timestamp": "timestamp",
+    "originalURL": "",
+    "retrievedURL": "",
+    "addedTime": "timestamp"
+  },
+  "contentFile": [
+    {
+      "timestamp": "timestamp",
+      "retrievedTime": "timestamp",
+      "retrievedCommand": "text",
+      "contentHTTPStatusCode": "text",
+      "contentMimeType": "text",
+      "contentSize": "number",
+      "contentFileName": "content-$timestamp.ext",
+      "avScanTime": "timestamp",
+      "avScanCommand": "text",
+      "avScanResult": "text"
+    }
+  ],
+  "contentText": [
+    {
+      "timestamp": "timestamp",
+      "createdFrom": "contentFileName",
+      "createdCommand": "text",
+      "createdTime": "timestamp",
+      "contentTextFile": "content-text-$timestamp.ext",
+      "contentTextFormat": "txt/json/md/csv/etc."
+    }
+  ],
+  "contentAIProcessing": [
+    {
+      "timestamp": "timestamp",
+      "model": "name",
+      "time": "timestamp",
+      "promptSent": "text",
+      "contentSentType": "contentFile or contentText",
+      "contentSentFile": "contentFileName or contentTextFile",
+      "resultFormat": "text",
+      "contentAIProcessingFile": "content-$model-$timestamp.txt"
+    }
+  ]
+}
