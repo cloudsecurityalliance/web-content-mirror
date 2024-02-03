@@ -16,6 +16,10 @@ General process is:
 * Optional: Get the context text and update the contentText object and file, this can be done multiple times e.g. as we get better PDF extraction tools or decide to structure the format in md instead of just text for example
 * Depending on prompt/capabilities send a prompt and content file or contentText file to AI and get result, add contentAIProcessing object and file
 
+# Dealing with files
+
+If we get a file with no origin URL we simply use the filename for the SHA512 and otherwise treat it like a URL.
+
 # Adding and updating data in the S3 bucket
 
 The S3 bucket does NOT have versioning enabled. This is intentional, as we do not want to rely upon it.
