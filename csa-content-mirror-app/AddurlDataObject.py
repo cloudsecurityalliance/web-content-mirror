@@ -50,6 +50,12 @@ class AddurlDataObject:
         else:
             print(f"'kv_data.json' already exists in {data_directory}. Skipping file creation.")
 
-# Example usage:
-# processor = AddurlDataObject('/path/to/downloads')
-# processor.add_url('https://example.com/page')
+# Example Usage
+if __name__ == "__main__":
+    url = "https://example.com/some-content#anchor"
+    download_directory = "/path/to/download"
+
+    # Create an instance of AddContentFileObject
+    processor = AddurlDataObject(download_directory)
+
+    processor.add_url(url)
