@@ -2,7 +2,7 @@
 
 The directory /web-content-mirror/ contains root files that get synchronized into the S3 bucket.
 
-In the S3 bucket it also contains data directories in the /data/ directory in the form /domain-name/base64.urlsafe_b64encode(url.encode('utf-8'))/ of URL/content for that URL. Please note any anchor tag is removed from the URL first.
+In the S3 bucket it also contains data directories in the /data/ directory in the form /domain-name/SHA512/ of URL/content for that URL. Please note any anchor tag is removed from the URL first. We can'tr use base64.urlsafe_b64encode(url.encode('utf-8')) because the paths are to long for some server operating systems.
 
 Please note that URLs can be retrieved multiple times (e.g. Hacker News threads with more comments), processed to text/csv/json/md multiple times (e.g. as we get better PDF extraction tools) and processed by AI multiuple times (e.g. as we have better text input, better prompts, better models, etc.).
 
@@ -13,8 +13,8 @@ General process is:
 * AddURLDataObject()
   * Add URL (write basic kv_data.json to data/domain/base64/kv_data.json with urlData object)
 * StoreURLContentFileObject()
-  * Retrieve URL and update data/domain/base64/kv_data.json with a contentFile object and file
-  * Given a URL and a file update data/domain/base64/kv_data.json with a contentFile object and file for manual uploads
+  * Retrieve URL and update data/domain/SHA512/kv_data.json with a contentFile object and file
+  * Given a URL and a file update data/domain/SHA512/kv_data.json with a contentFile object and file for manual uploads
   * When loading the URLs from a text file remove the anchor and deduplicate the list for downloads and analysis
 * StoreFileObject()
   * Given a filename/path generate an entry based on the filename (so be unique), use domain "file", update data/domain/base64/kv_data.json with a contentFile object and file for manual uploads
