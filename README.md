@@ -12,9 +12,13 @@ General process is:
 
 * Add URL (write basic kv_data.json to domain/SHA512_of_URL/kv_data.json with urlData object)
 * Retrieve URL and update domain/SHA512_of_URL/kv_data.json with a contentFile object and file
+  * Given a URL and a file update domain/SHA512_of_URL/kv_data.json with a contentFile object and file for manual uploads
+  * Given a filename/path generate an entry based on the filename (so be unique), use domain "file", update domain/SHA512_of_URL/kv_data.json with a contentFile object and file for manual uploads
+  * When loading the URLs from a text file remove the anchor and deduplicate the list for downloads and analysis
 * Optional: AV scan the content and update avScan fields
 * Optional: Get the context text and update the contentText object and file, this can be done multiple times e.g. as we get better PDF extraction tools or decide to structure the format in md instead of just text for example
 * Depending on prompt/capabilities send a prompt and content file or contentText file to AI and get result, add contentAIProcessing object and file
+
 
 # Dealing with files
 
