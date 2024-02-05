@@ -2,7 +2,7 @@
 
 The directory /web-content-mirror/ contains root files that get synchronized into the S3 bucket.
 
-In the S3 bucket it also contains directories in the form /domain-name/SHA512 of URL/content for that URL.
+In the S3 bucket it also contains data directories in the /data/ directory in the form /domain-name/base64.urlsafe_b64encode(url.encode('utf-8'))/ of URL/content for that URL. Please note any anchor tag is removed from the URL first.
 
 Please note that URLs can be retrieved multiple times (e.g. Hacker News threads with more comments), processed to text/csv/json/md multiple times (e.g. as we get better PDF extraction tools) and processed by AI multiuple times (e.g. as we have better text input, better prompts, better models, etc.).
 
@@ -10,19 +10,18 @@ Every object is in a list so they all get a timestamp so we can easily order the
 
 General process is:
 
-* Add URL (write basic kv_data.json to domain/SHA512_of_URL/kv_data.json with urlData object)
-* Retrieve URL and update domain/SHA512_of_URL/kv_data.json with a contentFile object and file
-  * Given a URL and a file update domain/SHA512_of_URL/kv_data.json with a contentFile object and file for manual uploads
-  * Given a filename/path generate an entry based on the filename (so be unique), use domain "file", update domain/SHA512_of_URL/kv_data.json with a contentFile object and file for manual uploads
+* Add URL (write basic kv_data.json to data/domain/base64/kv_data.json with urlData object)
+* Retrieve URL and update data/domain/base64/kv_data.json with a contentFile object and file
+  * Given a URL and a file update data/domain/base64/kv_data.json with a contentFile object and file for manual uploads
+  * Given a filename/path generate an entry based on the filename (so be unique), use domain "file", update data/domain/base64/kv_data.json with a contentFile object and file for manual uploads
   * When loading the URLs from a text file remove the anchor and deduplicate the list for downloads and analysis
 * Optional: AV scan the content and update avScan fields
 * Optional: Get the context text and update the contentText object and file, this can be done multiple times e.g. as we get better PDF extraction tools or decide to structure the format in md instead of just text for example
 * Depending on prompt/capabilities send a prompt and content file or contentText file to AI and get result, add contentAIProcessing object and file
 
-
 # Dealing with files
 
-If we get a file with no origin URL we simply use the filename for the SHA512 and otherwise treat it like a URL.
+If we get a file with no origin URL we simply use the filename for the base64 and otherwise treat it like a URL. This means we'll want to rename files to be unique.
 
 # Adding and updating data in the S3 bucket
 
